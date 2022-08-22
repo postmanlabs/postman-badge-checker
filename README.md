@@ -12,12 +12,12 @@ Used for checking and awarding Postman badges.
 *   Postman APIs 101 | [Badgr](https://badgr.com/public/badges/0WGPGyuYSwmXOhr-6v7D8Q) | [Collection](https://www.postman.com/postman/workspace/postman-galaxy-training/documentation/9065401-2aa44ec4-a674-4216-a451-8a3cfd98ff77)
     
 
-### Postman Student Program
+Postman Student Program
 
-*   Postman Student Expert | [Badgr](https://badgr.com/public/badges/G0U1YVeOSdGAiytb9Yw6_w) | Collection
-*   Postman Student Leader | [Badgr](https://badgr.com/public/badges/kpk6c8CDRKSQgaJoR-9ZhA) | Collection
+*   [Postman Student Expert](https://www.postman.com/company/student-program/#student-expert-program)
+*   [Postman Student Leader](https://www.postman.com/company/student-program/#postman-student-leader-program)
     
 
-### Postman Supernova
+Postman Supernova Program
 
-*   Postman Supernova | [Badgr](https://badgr.com/public/badges/RMBeLooiQXGwjZXnx7wU5Q) | Collection
+*   [Postman Supernova](https://www.postman.com/company/supernovas-program/)
