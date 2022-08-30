@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "83dae7f7-ba4f-4102-9311-6e4b62cf9fd6",
+		"name": "101 Processing",
+		"description": "This is a backup, more manual method of validating student submissions if you can't get Google auth working.\n\nThe request in this collection just has a duplicate of the test script in the collection the learner worked through.\n\nCopy the submitted collection urls from the form sheet and save in a csv file like this:\n\n```\ncollection-url\nhttps://www.getpostman.com/collections/b96ac96c2ed9fedc6e04\nhttps://www.getpostman.com/collections/29631fbf3735a7abca83\nhttps://www.getpostman.com/collections/4454f99e0e7a57b09837\n```\n\nRun the collection, choosing the csv file and check for fails / passes.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9215231"
+	},
+	"item": [
+		{
+			"name": "Test 101s",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//auth details at collection level",
+							"let authObj = pm.response.json().auth;",
+							"//request array",
+							"let requestArr = pm.response.json().item[0].item;",
+							"",
+							"pm.test(\"If you have any fails below look back through the requests or ask for support. When all of your tests pass include your collection link here to get your badge: bit.ly/submit-apis-101\", () => {",
+							"    pm.expect(true);",
+							"});",
+							"",
+							"//used auth",
+							"pm.test(\"Authorized requests\", () => {",
+							"    pm.expect(authObj).to.be.an(\"object\");",
+							"    pm.expect(authObj).to.have.property(\"apikey\"); ",
+							"    console.log(authObj);",
+							"});",
+							"",
+							"//used all required methods",
+							"pm.test(\"Used GET, POST, PUT, DELETE methods\", () => {",
+							"    //first folder should have all methods in requests",
+							"    let methArr = requestArr.map(value => value.request.method); ",
+							"    console.log(methArr);",
+							"    pm.expect(methArr).to.include.members([\"GET\", \"POST\", \"PUT\", \"DELETE\"]);",
+							"});",
+							"",
+							"//used params - query and path",
+							"pm.test(\"Used query and path parameters\", () => {",
+							"    //first folder should have query",
+							"    let queryArr = requestArr.filter(value => value.request.url.query).map(value => value.request.url.query);",
+							"    console.log(queryArr);",
+							"    pm.expect(queryArr).to.have.length.of.above(0);",
+							"    //first folder should also have path",
+							"    let pathArr = requestArr.filter(value => value.request.url.path).map(value => value.request.url.path);",
+							"    var pathParams = pathArr.flat().filter(p => p.startsWith(':')); ",
+							"    console.log(pathParams);",
+							"    pm.expect(pathParams).to.have.length.of.above(0);",
+							"});",
+							"",
+							"//sent body",
+							"pm.test(\"Sent body data\", () => {",
+							"    //first folder should have a body",
+							"    let bodyArr = requestArr.filter(value => value.request.body).map(value => value.request.body); ",
+							"    console.log(bodyArr);",
+							"    pm.expect(bodyArr).to.have.length.of.above(0);",
+							"});",
+							"",
+							"//used vars (can currently only check env with run output - future enhancement)",
+							"pm.test(\"Used variables\", () => {",
+							"    //base path for main folder should use var",
+							"    //url is object when path or query param, string otherwise",
+							"    let addresses = requestArr.filter(value => value.request.url.raw ? value.request.url.raw : value.request.url).map(value => value.request.url.raw ? value.request.url.raw : value.request.url);",
+							"    var addressVars = addresses.filter(p => encodeURI(p).indexOf('%7B%7B')>-1); ",
+							"    console.log(addressVars);",
+							"    pm.expect(addressVars).to.have.length.of.above(0);",
+							"    //auth should also use var",
+							"    pm.expect(encodeURI(authObj.apikey.value).indexOf('%7B%7B')).to.be.above(-1);",
+							"",
+							"});",
+							"",
+							"//visualizer output",
+							"var template = `",
+							"<h3>Complete your collection</h3>",
+							"<p>",
+							"    Copy your completed collection link in as the request address (make sure your requests are saved), hit <strong>Send</strong> and open the Test Results.",
+							"</p>",
+							"<p>",
+							"If you have any fails, look back through the requests or ask for support in the session chat or conference help desk. When all of your tests pass, navigate to this form in your browser and include your collection link to get your badge: bit.ly/submit-apis-101",
+							"</p>",
+							"`;",
+							"pm.visualizer.set(template, {});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{COLLECTION_JSON_URL}}",
+					"host": [
+						"{{COLLECTION_JSON_URL}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
