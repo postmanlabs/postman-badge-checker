@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "bb2730bc-52e4-433c-9b4d-cefef5182fc8",
+		"name": "API-First Processing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9215231"
+	},
+	"item": [
+		{
+			"name": "Test API-First",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var workspace = pm.response.json().record;",
+							"",
+							"pm.test(\"Workspace has collections\", function () {",
+							"    pm.expect(workspace.collections.length).to.be.at.least(2);",
+							"});",
+							"",
+							"pm.test(\"Workspace has an environment\", function () {",
+							"    pm.expect(workspace.environments.length).to.be.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Workspace has a mock\", function () {",
+							"    pm.expect(workspace.mocks.length).to.be.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Workspace has a monitor\", function () {",
+							"    pm.expect(workspace.monitors.length).to.be.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Workspace has an API\", function () {",
+							"    pm.expect(workspace.apis.length).to.be.at.least(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{COLLECTION_JSON_URL}}",
+					"host": [
+						"{{COLLECTION_JSON_URL}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
