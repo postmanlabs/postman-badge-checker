@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b184f317-b3f6-43fd-9397-796806fa5ca5",
+		"_postman_id": "f40e4fdc-a653-488f-bc25-072c01e221c4",
 		"name": "Testing and automation processing",
 		"description": "This is a backup, more manual method of validating student submissions if you can't get Google auth working.\n\nThe request in this collection just has a duplicate of the test script in the collection the learner worked through.\n\nCopy the submitted collection urls from the form sheet and save in a csv file like this:\n\n```\ncollection-url\nhttps://www.getpostman.com/collections/b96ac96c2ed9fedc6e04\nhttps://www.getpostman.com/collections/29631fbf3735a7abca83\nhttps://www.getpostman.com/collections/4454f99e0e7a57b09837\n```\n\nRun the collection, choosing the csv file and check for fails / passes.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -14,7 +14,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"let myCollection = pm.response.json();",
+							"let myCollection = pm.response.json()",
+							"",
+							"if (myCollection.collection) {",
+							"    myCollection = myCollection.collection",
+							"}",
+							"",
 							"let requests = myCollection.item;",
 							"console.log(requests);",
 							"let tests_pm = [],",
