@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "83dae7f7-ba4f-4102-9311-6e4b62cf9fd6",
+		"_postman_id": "4f6c6224-28fb-4187-8e31-fc2b968e8438",
 		"name": "101 Processing",
 		"description": "This is a backup, more manual method of validating student submissions if you can't get Google auth working.\n\nThe request in this collection just has a duplicate of the test script in the collection the learner worked through.\n\nCopy the submitted collection urls from the form sheet and save in a csv file like this:\n\n```\ncollection-url\nhttps://www.getpostman.com/collections/b96ac96c2ed9fedc6e04\nhttps://www.getpostman.com/collections/29631fbf3735a7abca83\nhttps://www.getpostman.com/collections/4454f99e0e7a57b09837\n```\n\nRun the collection, choosing the csv file and check for fails / passes.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -14,10 +14,16 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"let body = pm.response.json()",
+							"",
+							"if (body.collection) {",
+							"    body = body.collection",
+							"}",
+							"",
 							"//auth details at collection level",
-							"let authObj = pm.response.json().auth;",
+							"let authObj = body.auth;",
 							"//request array",
-							"let requestArr = pm.response.json().item[0].item;",
+							"let requestArr = body.item[0].item;",
 							"",
 							"pm.test(\"If you have any fails below look back through the requests or ask for support. When all of your tests pass include your collection link here to get your badge: bit.ly/submit-apis-101\", () => {",
 							"    pm.expect(true);",
