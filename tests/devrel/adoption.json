@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c25175e0-d050-4025-8146-e906e305faa2",
+		"_postman_id": "a879f094-e641-46b3-a598-4d2ebc7903c7",
 		"name": "Adoption processing",
 		"description": "This is a backup, more manual method of validating student submissions if you can't get Google auth working.\n\nThe request in this collection just has a duplicate of the test script in the collection the learner worked through.\n\nCopy the submitted collection urls from the form sheet and save in a csv file like this:\n\n```\ncollection-url\nhttps://www.getpostman.com/collections/b96ac96c2ed9fedc6e04\nhttps://www.getpostman.com/collections/29631fbf3735a7abca83\nhttps://www.getpostman.com/collections/4454f99e0e7a57b09837\n```\n\nRun the collection, choosing the csv file and check for fails / passes.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -14,10 +14,16 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"let body = pm.response.json()",
+							"",
+							"if (body.collection) {",
+							"    body = body.collection",
+							"}",
+							"",
 							"//request array",
-							"let requestArr = pm.response.json().item[0].item;",
+							"let requestArr = body.item[0].item;",
 							"//collection vars",
-							"let collVars=pm.response.json().variable;",
+							"let collVars = body.variable;",
 							"",
 							"//added docs",
 							"pm.test(\"Added request description\", () => {",
@@ -55,7 +61,7 @@
 							"",
 							"//published workspace",
 							"pm.test(\"Published workspace (included in Headers 'workspace' param)\", () => {",
-							"    let params=pm.response.json().item[1].item[1].request.header[0];",
+							"    let params = body.item[1].item[1].request.header[0];",
 							"    pm.expect(params.value).to.have.length.greaterThan(0);",
 							"    pm.expect(params.value).to.contain('postman.com');",
 							"    pm.expect(params.value).to.contain('/workspace');",
