@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "e5065880-c320-4552-922d-2c86cdee149d",
+		"name": "Postman Intro processing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24334471"
+	},
+	"item": [
+		{
+			"name": "Test Postman intro",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"let body = pm.response.json()",
+							"",
+							"if (body.collection) {",
+							"    body = body.collection",
+							"}",
+							"",
+							"let testResults = {}",
+							"",
+							"pm.test(\"Check Request 1\", () => {",
+							"    pm.expect(body.info.name).equals(\"Intro to HTTP APIs Module\")",
+							"",
+							"    let apodRequest = body.item.find(req => { return req.name === \"Picture of the Day\"})",
+							"    pm.expect(apodRequest.name, 'pic of the day request name').equals(\"Picture of the Day\")",
+							"    let apodTest = apodRequest.event.find(event => { return event.listen === \"test\"})",
+							"    pm.expect(apodTest.script.exec.toString(), 'pic of the day test').includes(\"pm.test\")",
+							"    pm.expect(apodTest.script.exec.toString(), 'pic of the day test').includes(\"Status code is 200\")",
+							"    pm.expect(apodTest.script.exec.toString(), 'pic of the day test').includes(\"pm.response.to.have.status(200)\")",
+							"    pm.expect(apodRequest.request.method, 'pic of the day method').equals(\"GET\")",
+							"    pm.expect(apodRequest.request.url.raw, 'pic of the day url').equals(\"https://api.nasa.gov/planetary/apod\")",
+							"    pm.expect(apodRequest.request.url.query[0].key, 'pic of the day api key').equals(\"api_key\")",
+							"    pm.expect(apodRequest.request.url.query[0].value, 'pic of the day api key').equals(\"{{nasa_api_key}}\")",
+							"});",
+							"",
+							"pm.test(\"Check Request 2\", () => {",
+							"    let novRequest = body.item.find(req => { return req.name === \"Pictures from November 2022\"})",
+							"    pm.expect(novRequest.name, 'nov request name').equals(\"Pictures from November 2022\")",
+							"    let novTest = novRequest.event.find(event => { return event.listen === \"test\"})",
+							"    pm.expect(novTest.script.exec.toString(), 'nov test').includes(\"nasa_image_url\")",
+							"    pm.expect(novTest.script.exec.toString(), 'nov test').includes(\"pm.collectionVariables.set\")",
+							"    pm.expect(novTest.script.exec.toString(), 'nov test').includes(\"pm.response.json\")",
+							"    pm.expect(novRequest.request.method, 'nov method').equals(\"GET\")",
+							"    pm.expect(novRequest.request.url.raw, 'nov url').equals(\"https://api.nasa.gov/planetary/apod?start_date=2022-11-01&end_date=2022-11-30\")",
+							"    let novKey = novRequest.request.url.query.find(item => {return item.key === \"api_key\"})",
+							"    pm.expect(novKey.key, 'nov api key').equals(\"api_key\")",
+							"    pm.expect(novKey.value, 'nov api key').equals(\"{{nasa_api_key}}\")",
+							"    let novQuery= novRequest.request.url.query.find(item => {return item.key === \"start_date\"})",
+							"    pm.expect(novQuery.key, 'nov start date').equals(\"start_date\")",
+							"    pm.expect(novQuery.value, 'nov start date').equals(\"2022-11-01\")",
+							"});",
+							"",
+							"pm.test(\"Check Request 3\", () => {",
+							"    let imageRequest = body.item.find(req => { return req.name === \"Retrieve image\"})",
+							"    pm.expect(imageRequest.name, 'image request name').equals(\"Retrieve image\")",
+							"    pm.expect(imageRequest.request.method, 'image method').equals(\"GET\")",
+							"    pm.expect(imageRequest.request.url.raw, 'image url').equals(\"{{nasa_image_url}}\")",
+							"});",
+							"",
+							"pm.test(\"Check collection-level details\", () => {",
+							"    pm.expect(body.auth.type, 'collection-level auth').equals(\"apikey\")",
+							"    let collTest = body.event.find(event => {return event.listen === \"test\"})",
+							"    pm.expect(collTest.script.exec.toString(), 'collection test').includes(\"pm.test\")",
+							"    pm.expect(collTest.script.exec.toString(), 'collection test').includes(\"Status code is 200\")",
+							"    pm.expect(collTest.script.exec.toString(), 'collection test').includes(\"pm.response.to.have.status(200)\")",
+							"    let collVar = body.variable.find(item => {return item.key === \"nasa_api_key\"})",
+							"    pm.expect(collVar.key).equals(\"nasa_api_key\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{COLLECTION_JSON_URL}}",
+					"host": [
+						"{{COLLECTION_JSON_URL}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
