@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "444cf526-9926-4e0e-9815-9ff0cf7d2ce1",
+		"name": "S - Intro to APIs and Postman - Submit",
+		"description": "For [Skilljar Lesson Completion API:](https://postman.postman.co/workspace/Skilljar-Lesson-Completion-API-~36dd1eac-366b-4c7d-9492-b5a6df8d052b/collection/15567703-04406077-1ae0-47b3-acd0-aae610ce6128?ctx=documentation)\n\npublishedCourseId: `2q2jokzsn62y8`\n\nlessonId: `go6mgkytvk8u`\n\nid: `2q2jokzsn62y8:go6mgkytvk8u`\n\nTest JSON hosted in GitHub\n\n[https://github.com/Postman-Student-Program/postman-academy-lesson-completion-tests-student-program/blob/main/postman-api-fundamentals-student-expert/intro-to-apis-and-postman.json](https://github.com/Postman-Student-Program/postman-academy-lesson-completion-tests-student-program/blob/main/postman-api-fundamentals-student-expert/intro-to-apis-and-postman.json)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15567703"
+	},
+	"item": [
+		{
+			"name": "check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/** Make compatible with Postman API */",
+							"let body = pm.response.json()",
+							"",
+							"if (body.collection) {",
+							"    body = body.collection",
+							"}",
+							"",
+							"const reqs = body.item",
+							"",
+							" /** 1. get books */",
+							"const req1 = reqs[0]",
+							"pm.test(\"[get books] Is a GET request\", function () {",
+							"    pm.expect(req1.request.method).to.equal(\"GET\");",
+							"});",
+							"",
+							"pm.test(`[get books] base URL is set to \\{\\{baseUrl\\}\\}`, function () {",
+							"    const pattern = /^{{baseUrl}}/i",
+							"    const url = req1.request.url.raw || req1.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"pm.test(\"[get books] path is set to /books\", function () {",
+							"    const pattern = /\\/books$/",
+							"    const url = req1.request.url.raw || req1.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"/** 2. get fiction books */",
+							"const req2 = reqs[1]",
+							"pm.test(\"[get fiction books] is a GET request\", function () {",
+							"    pm.expect(req2.request.method).to.equal(\"GET\");",
+							"});",
+							"    ",
+							"pm.test(`[get fiction books] base URL is set to {{baseUrl}}`, function () {",
+							"    const pattern = /^{{baseUrl}}/i",
+							"    const url = req2.request.url.raw || req2.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"pm.test(\"[get fiction books] path is set to /books\", function () {",
+							"    const pattern = /\\/books\\??/",
+							"    const url = req2.request.url.raw || req2.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"pm.test(\"[get fiction books] query parameters for genre=fiction and checkedOut=false are both set\", function () {",
+							"    const condition = req2.request.url.query.some(q => q.key === 'genre' && q.value.match(/fiction/i)) && req2.request.url.query.some(q => q.key === 'checkedOut' && q.value.match(/false/i))",
+							"    pm.expect(condition).to.equal(true);",
+							"});",
+							"",
+							"/** 3. get book by id */",
+							"const req3 = reqs[2]",
+							"pm.test(\"[get book by id] Is a GET request\", function () {",
+							"    pm.expect(req3.request.method).to.equal(\"GET\");",
+							"});",
+							"",
+							"pm.test(`[get book by id] base URL is set to {{baseUrl}}`, function () {",
+							"    const pattern = /^{{baseUrl}}/i",
+							"    const url = req3.request.url.raw || req3.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"pm.test(`[get book by id] path is set to /books/:id`, function () {",
+							"    const pattern = /\\/books\\/:id$/",
+							"    const url = req3.request.url.raw || req3.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"/** 4. add a book */",
+							"const req4 = reqs[3]",
+							"pm.test(\"[add a book] Is a POST request\", function () {",
+							"    pm.expect(req4.request.method).to.equal(\"POST\");",
+							"});",
+							"",
+							"pm.test(`[add a book] base URL is set to {{baseUrl}}`, function () {",
+							"    const pattern = /^{{baseUrl}}/i",
+							"    const url = req4.request.url.raw || req4.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"pm.test(`[add a book] path is set to /books`, function () {",
+							"    const pattern = /\\/books$/",
+							"    const url = req4.request.url.raw || req4.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"pm.test(`[add a book] has a JSON body with title, author, genre, yearPublished`, function () {",
+							"    const b = JSON.parse(req4.request.body.raw)",
+							"    pm.expect(b).to.have.property('title');",
+							"    pm.expect(b).to.have.property('author');",
+							"    pm.expect(b).to.have.property('genre');",
+							"    pm.expect(b).to.have.property('yearPublished');",
+							"});",
+							"",
+							"pm.test(`[add a book] has script in Tests tab`, function () {",
+							"    pm.expect(req4.event.length).to.be.greaterThan(0);",
+							"});",
+							"",
+							" /** 5. checkout a book */",
+							"const req5 = reqs[4]",
+							"pm.test(\"[checkout a book] Is a PATCH request\", function () {",
+							"    pm.expect(req5.request.method).to.equal(\"PATCH\");",
+							"});",
+							"",
+							"pm.test(`[checkout a book] base URL is set to {{baseUrl}}`, function () {",
+							"    const pattern = /^{{baseUrl}}/i",
+							"    const url = req5.request.url.raw || req5.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"pm.test(`[checkout a book] path is set to /books/:id`, function () {",
+							"    const pattern = /\\/books\\/:id$/",
+							"    const url = req5.request.url.raw || req5.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"/** 6. delete a book */",
+							"const req6 = reqs[5]",
+							"console.log(req6)",
+							"pm.test(\"[delete a book] Is a DELETE request\", function () {",
+							"    pm.expect(req6.request.method).to.equal(\"DELETE\");",
+							"});",
+							"",
+							"pm.test(`[delete a book] base URL is set to {{baseUrl}}`, function () {",
+							"    const pattern = /^{{baseUrl}}/i",
+							"    const url = req6.request.url.raw || req6.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"pm.test(`[delete a book] path is set to /books/:id`, function () {",
+							"    const pattern = /\\/books\\/:id$/",
+							"    const url = req6.request.url.raw || req6.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"/** Collection */",
+							"pm.test(`[COLLECTION] Collection level Auth is set to type API Key with header named api-key`, function () {",
+							"    console.log(body.auth)",
+							"    pm.expect(body.auth.type).to.equal(`apikey`);",
+							"    /** account for collection v2 and v2.1 schema differences for auth */",
+							"    if (body.auth.apikey.key) {",
+							"        pm.expect(body.auth.apikey.key).to.equal(`api-key`);",
+							"        } else {",
+							"        pm.expect(body.auth.apikey.some(o => o.value === 'api-key')).to.equal(true);",
+							"        }",
+							"});",
+							"",
+							"/** [skillcheck] */",
+							"const req7 = reqs[6]",
+							"",
+							"//** [skillcheck] 1. Used POST as the request method */",
+							"pm.test(\"1. [skillcheck] Used POST as the request method\", function () {",
+							"    pm.expect(req7.request.method).to.equal(\"POST\");",
+							"});",
+							"",
+							"//** [skillcheck] 2. Used a query parameter called “movieName\" */",
+							"pm.test(`2. [skillcheck] Used a query parameter called 'movieName'`, function () {",
+							"    const condition = req7.request.url.query.some(q => q.key === 'movieName');",
+							"    pm.expect(condition).to.equal(true);",
+							"});",
+							"",
+							"// ** [skillcheck] 3. Used a base URL variable called {{skillcheckBaseUrl}} */",
+							"pm.test(`3. [skillcheck] Used a base URL variable called \\{\\{skillcheckBaseUrl\\}\\}`, function () {",
+							"    const pattern = /^{{skillcheckBaseUrl}}/i",
+							"    const url = req7.request.url.raw || req7.request.url",
+							"    pm.expect(url.trim()).to.match(pattern);",
+							"});",
+							"",
+							"// ** [skillcheck] 4. Set request auth to “API key” & header to “student-expert */",
+							"pm.test(`4. [skillcheck] Set request auth to “API key” & header to “student-expert\"`, function () {",
+							"    pm.expect(req7.request.auth.type).to.equal('apikey')",
+							"    const keyObject = req7.request.auth.apikey.filter(item => item.key === \"key\")[0];",
+							"    pm.expect(keyObject.value).to.match(/student-expert/i)",
+							"});",
+							"",
+							"//** [skillcheck] 5. Used a JSON body with 'actorName' */",
+							"pm.test(`5. [skillcheck] Used a JSON body with 'actorName; `, function () {",
+							"    const b = JSON.parse(req7.request.body.raw)",
+							"    pm.expect(b).to.have.property(\"actorName\");",
+							"});",
+							"",
+							"// ** [skillcheck] 6. Set \"favoriteActor\" as a collection variable using pm.collectionVariables.set(...) in  Tests tab script */",
+							"pm.test(`6. [skillcheck] Set \"favoriteActor\" as a collection variable using pm.collectionVariables set(...) in  Tests tab script`, function () {",
+							"    const studentScript = req7.event[0].script.exec.join(\"\\n\")",
+							"    const pattern = /pm\\.collectionVariables\\.set\\([\"'`]favoriteActor[\"'`]/",
+							"    pm.expect(studentScript).to.match(pattern);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "check",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{COLLECTION_JSON_URL}}",
+							"host": [
+								"{{COLLECTION_JSON_URL}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Apr 2022 00:30:58 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": ""
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=5d4bf04c35196505"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=f2b5f51362ca937f"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "private, no-cache, no-store, must-revalidate"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"9ff-iQllLQ2W7EAFgvTDFVDVXf9MCq0\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 03e4d3b42a136dd5df035a167106f808.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "EWR50-C1"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "6Iw9JGbqGRoGsNxgLt8FWvAIuxmb77rrFjIad7qPbilyJ-RQImAAWw=="
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"info\": {\n        \"_postman_id\": \"d2a2ff70-f898-455e-95cc-4f5560fdd7fc\",\n        \"name\": \"Postman Library API v2\",\n        \"schema\": \"https://schema.getpostman.com/json/collection/v2.0.0/collection.json\"\n    },\n    \"item\": [\n        {\n            \"name\": \"get books\",\n            \"id\": \"d6ef1400-d54b-4760-bdd3-546bdd2f877d\",\n            \"request\": {\n                \"method\": \"GET\",\n                \"header\": [],\n                \"url\": {\n                    \"raw\": \"{{baseUrl}}/books\",\n                    \"host\": [\n                        \"{{baseUrl}}\"\n                    ],\n                    \"path\": [\n                        \"books\"\n                    ],\n                    \"query\": [\n                        {\n                            \"key\": \"search\",\n                            \"value\": \"to kill a mockingbird\",\n                            \"disabled\": true\n                        }\n                    ]\n                }\n            },\n            \"response\": []\n        },\n        {\n            \"name\": \"get fiction books\",\n            \"id\": \"0bc44d61-6ef6-404f-a721-27a7a45a8c9d\",\n            \"request\": {\n                \"method\": \"GET\",\n                \"header\": [],\n                \"url\": {\n                    \"raw\": \"{{baseUrl}}/books?genre=fiction&checkedOut=false\",\n                    \"host\": [\n                        \"{{baseUrl}}\"\n                    ],\n                    \"path\": [\n                        \"books\"\n                    ],\n                    \"query\": [\n                        {\n                            \"key\": \"genre\",\n                            \"value\": \"fiction\"\n                        },\n                        {\n                            \"key\": \"checkedOut\",\n                            \"value\": \"false\"\n                        }\n                    ]\n                }\n            },\n            \"response\": []\n        },\n        {\n            \"name\": \"get book by id\",\n            \"id\": \"6bac89ce-bddd-438c-b784-b7a14d7905f8\",\n            \"request\": {\n                \"method\": \"GET\",\n                \"header\": [],\n                \"url\": {\n                    \"raw\": \"{{baseUrl}}/books/:id\",\n                    \"host\": [\n                        \"{{baseUrl}}\"\n                    ],\n                    \"path\": [\n                        \"books\",\n                        \":id\"\n                    ],\n                    \"variable\": [\n                        {\n                            \"key\": \"id\",\n                            \"value\": \"{{id}}\"\n                        }\n                    ]\n                }\n            },\n            \"response\": []\n        },\n        {\n            \"name\": \"add a book\",\n            \"event\": [\n                {\n                    \"listen\": \"test\",\n                    \"script\": {\n                        \"type\": \"text/javascript\",\n                        \"exec\": [\n                            \"const id = pm.response.json().id\",\n                            \"pm.collectionVariables.set(\\\"id\\\", id)\"\n                        ]\n                    }\n                }\n            ],\n            \"id\": \"3e698416-b3ca-4158-98ea-5f5ca29c5ebb\",\n            \"request\": {\n                \"method\": \"POST\",\n                \"header\": [\n                    {\n                        \"key\": \"api-key\",\n                        \"value\": \"postmanrulz\",\n                        \"type\": \"text\"\n                    }\n                ],\n                \"body\": {\n                    \"mode\": \"raw\",\n                    \"raw\": \"{\\n  \\\"title\\\": \\\"Myth and Religion\\\",\\n  \\\"author\\\": \\\"Alan Watts\\\",\\n  \\\"genre\\\": \\\"philosophy\\\",\\n  \\\"yearPublished\\\": 1996\\n}\",\n                    \"options\": {\n                        \"raw\": {\n                            \"language\": \"json\"\n                        }\n                    }\n                },\n                \"url\": \"{{baseUrl}}/books\"\n            },\n            \"response\": []\n        },\n        {\n            \"name\": \"checkout a book\",\n            \"id\": \"11080499-6e75-466b-b0f7-b0aadcd456f4\",\n            \"request\": {\n                \"method\": \"PATCH\",\n                \"header\": [],\n                \"url\": {\n                    \"raw\": \"{{baseUrl}}/books/:id\",\n                    \"host\": [\n                        \"{{baseUrl}}\"\n                    ],\n                    \"path\": [\n                        \"books\",\n                        \":id\"\n                    ],\n                    \"variable\": [\n                        {\n                            \"key\": \"id\",\n                            \"value\": null\n                        }\n                    ]\n                }\n            },\n            \"response\": []\n        },\n        {\n            \"name\": \"delete a book\",\n            \"id\": \"92484007-88d2-41a0-a7d3-0b05d31f1694\",\n            \"request\": {\n                \"method\": \"DELETE\",\n                \"header\": [],\n                \"url\": {\n                    \"raw\": \"{{baseUrl}}/books/:id\",\n                    \"host\": [\n                        \"{{baseUrl}}\"\n                    ],\n                    \"path\": [\n                        \"books\",\n                        \":id\"\n                    ],\n                    \"variable\": [\n                        {\n                            \"key\": \"id\",\n                            \"value\": \"{{id}}\"\n                        }\n                    ]\n                }\n            },\n            \"response\": []\n        }\n    ],\n    \"auth\": {\n        \"type\": \"apikey\",\n        \"apikey\": {\n            \"value\": \"postmanrulz\",\n            \"key\": \"api-key\"\n        }\n    },\n    \"event\": [\n        {\n            \"listen\": \"prerequest\",\n            \"script\": {\n                \"id\": \"6d5aa258-d665-4f57-af7a-dcfca8489f8c\",\n                \"type\": \"text/javascript\",\n                \"exec\": [\n                    \"\"\n                ]\n            }\n        },\n        {\n            \"listen\": \"test\",\n            \"script\": {\n                \"id\": \"1959ffd3-1bae-48b2-91e6-2da8b8bd965a\",\n                \"type\": \"text/javascript\",\n                \"exec\": [\n                    \"\"\n                ]\n            }\n        }\n    ],\n    \"variable\": [\n        {\n            \"id\": \"34a415db-961c-4f9d-b752-31814ad40c30\",\n            \"key\": \"baseUrl\",\n            \"value\": \"https://library-api.postmanlabs.com\"\n        },\n        {\n            \"id\": \"f3ebbd2e-04a5-4f30-bf42-61603fca78f2\",\n            \"key\": \"id\",\n            \"value\": \"\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
