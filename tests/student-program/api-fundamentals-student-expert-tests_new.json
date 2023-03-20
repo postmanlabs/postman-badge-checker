@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "444cf526-9926-4e0e-9815-9ff0cf7d2ce1",
+		"_postman_id": "10fd1675-69fe-4cac-a6c7-887d35eeba35",
 		"name": "S - Intro to APIs and Postman - Submit",
 		"description": "For [Skilljar Lesson Completion API:](https://postman.postman.co/workspace/Skilljar-Lesson-Completion-API-~36dd1eac-366b-4c7d-9492-b5a6df8d052b/collection/15567703-04406077-1ae0-47b3-acd0-aae610ce6128?ctx=documentation)\n\npublishedCourseId: `2q2jokzsn62y8`\n\nlessonId: `go6mgkytvk8u`\n\nid: `2q2jokzsn62y8:go6mgkytvk8u`\n\nTest JSON hosted in GitHub\n\n[https://github.com/Postman-Student-Program/postman-academy-lesson-completion-tests-student-program/blob/main/postman-api-fundamentals-student-expert/intro-to-apis-and-postman.json](https://github.com/Postman-Student-Program/postman-academy-lesson-completion-tests-student-program/blob/main/postman-api-fundamentals-student-expert/intro-to-apis-and-postman.json)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15567703"
+		"_exporter_id": "17315696"
 	},
 	"item": [
 		{
@@ -198,7 +198,7 @@
 							"// ** [skillcheck] 6. Set \"favoriteActor\" as a collection variable using pm.collectionVariables.set(...) in  Tests tab script */",
 							"pm.test(`6. [skillcheck] Set \"favoriteActor\" as a collection variable using pm.collectionVariables set(...) in  Tests tab script`, function () {",
 							"    const studentScript = req7.event[0].script.exec.join(\"\\n\")",
-							"    const pattern = /pm\\.collectionVariables\\.set\\([\"'`]favoriteActor[\"'`]/",
+							"    const pattern = /pm\\.collectionVariables\\.set\\([\"']favou?riteActor[\"']/",
 							"    pm.expect(studentScript).to.match(pattern);",
 							"});",
 							"",
