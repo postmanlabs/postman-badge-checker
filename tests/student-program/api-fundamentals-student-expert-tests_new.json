@@ -30,7 +30,7 @@
 							"    pm.expect(req1.request.method).to.equal(\"GET\");",
 							"});",
 							"",
-							"pm.test(`[get books] ase URL is set to \\{\\{baseUrl\\}\\}`, function () {",
+							"pm.test(`[get books] base URL is set to \\{\\{baseUrl\\}\\}`, function () {",
 							"    const pattern = /^{{baseUrl}}/i",
 							"    const url = req1.request.url.raw || req1.request.url",
 							"    pm.expect(url.trim()).to.match(pattern);",
