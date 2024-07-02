@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "4a1d81ab-4766-4349-97a0-c865e87a948a",
-		"name": "S - Intro to APIs and Postman - Submit Copy",
+		"name": "Student Expert tests",
 		"description": "Tests for [Skilljar Lesson Completion API:](https://postman.postman.co/workspace/Skilljar-Lesson-Completion-API-~36dd1eac-366b-4c7d-9492-b5a6df8d052b/collection/15567703-04406077-1ae0-47b3-acd0-aae610ce6128?ctx=documentation)(and badging)\n\npublishedCourseId: `2q2jokzsn62y8`\n\nlessonId: `go6mgkytvk8u`\n\nid: `2q2jokzsn62y8:go6mgkytvk8u`\n\nTest JSON hosted in GitHub\n\n[https://github.com/postmanlabs/postman-badge-checker/blob/main/tests/student-program/api-fundamentals-student-expert-tests_new.json](https://github.com/postmanlabs/postman-badge-checker/blob/main/tests/student-program/api-fundamentals-student-expert-tests_new.json)\n\n### Testing the tests\n\n- DO NOT REPLACE THE VARIABLE \\`{{COLLECTION_URL}}\\` IN REQUEST URL\n    \n    - Serverside tests require the request URL text to be {{COLLECTION_URL}}, verbatim\n        \n    - instead, use environments in this workspace to try out the tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "15567703",
@@ -30,7 +30,7 @@
 							"    pm.expect(req1.request.method).to.equal(\"GET\");",
 							"});",
 							"",
-							"pm.test(`[get books] base URL is set to \\{\\{baseUrl\\}\\}`, function () {",
+							"pm.test(`[get books] ase URL is set to \\{\\{baseUrl\\}\\}`, function () {",
 							"    const pattern = /^{{baseUrl}}/i",
 							"    const url = req1.request.url.raw || req1.request.url",
 							"    pm.expect(url.trim()).to.match(pattern);",
