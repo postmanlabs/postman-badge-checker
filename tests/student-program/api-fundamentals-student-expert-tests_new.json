@@ -1,10 +1,11 @@
 {
 	"info": {
-		"_postman_id": "444cf526-9926-4e0e-9815-9ff0cf7d2ce1",
-		"name": "S - Intro to APIs and Postman - Submit",
-		"description": "For [Skilljar Lesson Completion API:](https://postman.postman.co/workspace/Skilljar-Lesson-Completion-API-~36dd1eac-366b-4c7d-9492-b5a6df8d052b/collection/15567703-04406077-1ae0-47b3-acd0-aae610ce6128?ctx=documentation)\n\npublishedCourseId: `2q2jokzsn62y8`\n\nlessonId: `go6mgkytvk8u`\n\nid: `2q2jokzsn62y8:go6mgkytvk8u`\n\nTest JSON hosted in GitHub\n\n[https://github.com/Postman-Student-Program/postman-academy-lesson-completion-tests-student-program/blob/main/postman-api-fundamentals-student-expert/intro-to-apis-and-postman.json](https://github.com/Postman-Student-Program/postman-academy-lesson-completion-tests-student-program/blob/main/postman-api-fundamentals-student-expert/intro-to-apis-and-postman.json)",
+		"_postman_id": "4a1d81ab-4766-4349-97a0-c865e87a948a",
+		"name": "S - Intro to APIs and Postman - Submit Copy",
+		"description": "Tests for [Skilljar Lesson Completion API:](https://postman.postman.co/workspace/Skilljar-Lesson-Completion-API-~36dd1eac-366b-4c7d-9492-b5a6df8d052b/collection/15567703-04406077-1ae0-47b3-acd0-aae610ce6128?ctx=documentation)(and badging)\n\npublishedCourseId: `2q2jokzsn62y8`\n\nlessonId: `go6mgkytvk8u`\n\nid: `2q2jokzsn62y8:go6mgkytvk8u`\n\nTest JSON hosted in GitHub\n\n[https://github.com/postmanlabs/postman-badge-checker/blob/main/tests/student-program/api-fundamentals-student-expert-tests_new.json](https://github.com/postmanlabs/postman-badge-checker/blob/main/tests/student-program/api-fundamentals-student-expert-tests_new.json)\n\n### Testing the tests\n\n- DO NOT REPLACE THE VARIABLE \\`{{COLLECTION_URL}}\\` IN REQUEST URL\n    \n    - Serverside tests require the request URL text to be {{COLLECTION_URL}}, verbatim\n        \n    - instead, use environments in this workspace to try out the tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15567703"
+		"_exporter_id": "15567703",
+		"_collection_link": "https://postman.postman.co/workspace/Skilljar-lesson-completion-test~b0b6d243-47f8-4b9d-8645-43536268110d/collection/15567703-4a1d81ab-4766-4349-97a0-c865e87a948a?action=share&source=collection_link&creator=15567703"
 	},
 	"item": [
 		{
@@ -59,7 +60,7 @@
 							"    pm.expect(url.trim()).to.match(pattern);",
 							"});",
 							"",
-							"pm.test(\"[get fiction books] query parameters for genre=fiction and checkedOut=false are both set\", function () {",
+							"pm.test(\"[get fiction books] query parameters for genre=fiction and checkedOut=false are both set with the correct values\", function () {",
 							"    const condition = req2.request.url.query.some(q => q.key === 'genre' && q.value.match(/fiction/i)) && req2.request.url.query.some(q => q.key === 'checkedOut' && q.value.match(/false/i))",
 							"    pm.expect(condition).to.equal(true);",
 							"});",
@@ -84,7 +85,7 @@
 							"",
 							"/** 4. add a book */",
 							"const req4 = reqs[3]",
-							"pm.test(\"[add a book] Is a POST request\", function () {",
+							"pm.test(\"[add a book] is a POST request\", function () {",
 							"    pm.expect(req4.request.method).to.equal(\"POST\");",
 							"});",
 							"",
@@ -108,13 +109,13 @@
 							"    pm.expect(b).to.have.property('yearPublished');",
 							"});",
 							"",
-							"pm.test(`[add a book] has script in Tests tab`, function () {",
+							"pm.test(`[add a book] has post-request script in Scripts tab`, function () {",
 							"    pm.expect(req4.event.length).to.be.greaterThan(0);",
 							"});",
 							"",
 							" /** 5. checkout a book */",
 							"const req5 = reqs[4]",
-							"pm.test(\"[checkout a book] Is a PATCH request\", function () {",
+							"pm.test(\"[checkout a book] is a PATCH request\", function () {",
 							"    pm.expect(req5.request.method).to.equal(\"PATCH\");",
 							"});",
 							"",
@@ -133,7 +134,7 @@
 							"/** 6. delete a book */",
 							"const req6 = reqs[5]",
 							"console.log(req6)",
-							"pm.test(\"[delete a book] Is a DELETE request\", function () {",
+							"pm.test(\"[delete a book] is a DELETE request\", function () {",
 							"    pm.expect(req6.request.method).to.equal(\"DELETE\");",
 							"});",
 							"",
@@ -183,7 +184,7 @@
 							"});",
 							"",
 							"// ** [skillcheck] 4. Set request auth to “API key” & header to “student-expert */",
-							"pm.test(`4. [skillcheck] Set request auth to “API key” & header to “student-expert\"`, function () {",
+							"pm.test(`4. [skillcheck] Set request level auth to “API key” & header to “student-expert\"`, function () {",
 							"    pm.expect(req7.request.auth.type).to.equal('apikey')",
 							"    const keyObject = req7.request.auth.apikey.filter(item => item.key === \"key\")[0];",
 							"    pm.expect(keyObject.value).to.match(/student-expert/i)",
@@ -204,7 +205,8 @@
 							"",
 							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
