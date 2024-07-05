@@ -2,7 +2,7 @@
 
 # Postman Badge Checker
 
-Used for checking and awarding Postman badges.
+This repo hosts exported Postman collections with tests for checking and awarding Postman badges.
 
 ## Badges list
 
