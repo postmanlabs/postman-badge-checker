@@ -17,7 +17,7 @@ This repo hosts exported Postman collections with tests for checking and awardin
 
 Postman Student Program
 
-- \*[Postman Student Expert](https://www.postman.com/company/student-program/#student-expert-program)
+- \*[Postman Student Expert](https://www.postman.com/company/student-program/#student-expert-program)  (Edit tests [here](https://postman.postman.co/workspace/%255Binternal%255D-Student-Expert-tests~b0b6d243-47f8-4b9d-8645-43536268110d/overview))
 - [Postman Student Leader](https://www.postman.com/company/student-program/#postman-student-leader-program)
 
 Postman Supernova Program
