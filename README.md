@@ -1,3 +1,5 @@
+🚨 **AUTOMATIONS RELAY ON THIS REPO - DO NOT CHANGE THE REPO NAME OR TEST FILE NAMES** 🚨
+
 # Postman Badge Checker
 
 Used for checking and awarding Postman badges.
